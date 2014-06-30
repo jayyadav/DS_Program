@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+	struct stack
+	{
+		int top;
+		int capacity;
+		int *arr;
+	};
+
+//	typedef struct stack S;
+
+
+
+	// initilise the stack	
+	struct stack *create()
+	{
+		struct stack *s=malloc(sizeof(struct stack));
+		if(!s)
+			return NULL;
+		s->capacity=10;
+		s->top=-1;
+		s->arr=malloc(s->capacity*sizeof(int));
+		if(!s->arr)
+			return NULL;
+		return s;
+	}
+		
+	//stack full
+	int isstackfull(struct stack *s)
+	{
+		return(s->top == (s->capacity - 1));
+
+	}
+
+	int isstackempty(struct stack *s)
+	{
+		return(s->top == -1);
+
+	}
+		// push
+	void push(struct stack *s,int data)
+	{
+		if(isstackfull(s))
+			printf("stak is full");
+		else
+			s->arr[++s->top]=data;
+	}
+	
+	//pop
+
+	int pop(struct stack *s)
+	{
+		if(isstackempty(s))
+		{
+			printf("stak is empty");
+			return 0;
+		}
+		else
+			printf("werw");
+			
+			return(s->arr[s->top--]);
+			
+	}	
+
+
+	//display
+	void display(struct stack *s)
+	{	
+		while(s->top != (-1))
+		{	
+			printf("%d",s->arr[s->top--]);
+			printf("  ");
+		}
+	}
+			
+
+	main()
+	{
+		int choice,data,d;
+		struct stack *s=create();
+		
+		while(1)
+		{
+			printf("1:PUSH \n");
+			printf("2:POP \n");
+			printf("3:DISPLAY \n");
+			printf("4:EXIT \n");
+			printf("Entr ur choice:   ");
+			scanf("%d",&choice);
+			
+			switch(choice)
+			{
+				case 1:
+						printf("Entr the data:   ");
+						scanf("%d",&data);
+						push(s,data);
+						printf("%d",s->top);
+						break;
+				case 2:
+						printf("deleted element:   ");
+						printf("top=%d\n",s->top);
+						d=pop(s);
+						printf("%d",d);
+						printf("\n");
+						break;
+			
+				case 3:
+						printf("Stack element  :   ");
+						display(s);
+						printf("\n");
+						break;
+				case 4:
+						exit(0);
+
+				default:
+							printf("wrng chois");
+			}
+		}
+	}
